@@ -1,8 +1,12 @@
 function createCard() {
     const card = document.createElement("div");
     card.classList.add("card");
-    
-
+    card.addEventListener("mouseover", (e) => {
+        e.target.style.setProperty("background-color", "green");
+    });
+    // card.addEventListener("mouseout", (e) => {
+    //     e.target.style.removeProperty("background-color");
+    // });
     return card;
 }
 
