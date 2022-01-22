@@ -16,13 +16,13 @@ function createCardRow() {
     return cardRowDiv;
 }
 
-function loadCards() {
+function loadCards(lengthOfSide=16) {
     const bodyDiv = document.querySelector("#body");
     let cardRow;
 
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < lengthOfSide; i++) {
         cardRow = createCardRow(bodyDiv);
-        for (let j = 0; j < 16; j++) {
+        for (let j = 0; j < lengthOfSide; j++) {
             cardRow.appendChild(createCard());
         }
 
@@ -30,4 +30,22 @@ function loadCards() {
     }
 }
 
+function prepareResetButton() {
+    const resetButton = document.querySelector("#reset-button");
+    const cards = document.querySelectorAll(".card");
+    const PROMPT_MESSAGE = "Enter number of cards required in each dimension (MAX 100)"; 
+    resetButton.addEventListener("click", (e) => {
+        cards.forEach((card) => {
+            card.style.removeProperty("background-color");
+        });
+        let lengthOfSide = parseInt(prompt(PROMPT_MESSAGE));
+        if (lengthOfSide > 100) {
+            lengthOfSide = 100;
+        }
+        document.querySelectorAll(".card-row").forEach((cardRow) => cardRow.remove());
+        loadCards(lengthOfSide);
+    })
+}
+
 loadCards();
+prepareResetButton();
